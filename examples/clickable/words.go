@@ -1,8 +1,6 @@
 package main
 
 import (
-	"math/rand"
-	"strings"
 	"sync"
 )
 
@@ -38,40 +36,10 @@ var (
 	nextWordMtx sync.Mutex
 )
 
-func nextRandomWord() string {
-	shuffle.Do(shuffleWords)
+func nextRandomWord() string { _ = "STUB: not implemented"; return "" }
 
-	nextWordMtx.Lock()
-	defer nextWordMtx.Unlock()
+func shuffleWords() { _ = "STUB: not implemented"; return }
 
-	adjectives = cycle(adjectives)
-	nouns = cycle(nouns)
+func capitalize(s string) string { _ = "STUB: not implemented"; return "" }
 
-	return capitalize(adjectives[0] + " " + nouns[0])
-}
-
-func shuffleWords() {
-	shuf := func(x []string) {
-		rand.Shuffle(len(x), func(i, j int) { x[i], x[j] = x[j], x[i] })
-	}
-	shuf(adjectives)
-	shuf(nouns)
-}
-
-func capitalize(s string) string {
-	words := strings.Fields(s)
-
-	for i, w := range words {
-		if i > 0 && strings.Contains(uncapitalized, " "+w+" ") {
-			words[i] = w
-		} else {
-			words[i] = strings.Title(w)
-		}
-	}
-
-	return strings.Join(words, " ")
-}
-
-func cycle(stack []string) []string {
-	return append(stack[1:], stack[0])
-}
+func cycle(stack []string) []string { _ = "STUB: not implemented"; return nil }

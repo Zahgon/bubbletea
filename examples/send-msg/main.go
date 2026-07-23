@@ -1,13 +1,9 @@
 package main
 
-// A simple example that shows how to send messages to a Bubble Tea program
-// from outside the program using Program.Send(Msg).
-
 import (
 	"fmt"
 	"math/rand"
 	"os"
-	"strings"
 	"time"
 
 	"charm.land/bubbles/v2/spinner"
@@ -28,13 +24,7 @@ type resultMsg struct {
 	food     string
 }
 
-func (r resultMsg) String() string {
-	if r.duration == 0 {
-		return dotStyle.Render(strings.Repeat(".", 30))
-	}
-	return fmt.Sprintf("🍔 Ate %s %s", r.food,
-		durationStyle.Render(r.duration.String()))
-}
+func (r resultMsg) String() string { _ = "STUB: not implemented"; return "" }
 
 type model struct {
 	spinner  spinner.Model
@@ -42,77 +32,25 @@ type model struct {
 	quitting bool
 }
 
-func newModel() model {
-	const numLastResults = 5
-	s := spinner.New()
-	s.Style = spinnerStyle
-	return model{
-		spinner: s,
-		results: make([]resultMsg, numLastResults),
-	}
-}
+func newModel() model { _ = "STUB: not implemented"; return *new(model) }
 
-func (m model) Init() tea.Cmd {
-	return m.spinner.Tick
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyPressMsg:
-		m.quitting = true
-		return m, tea.Quit
-	case resultMsg:
-		m.results = append(m.results[1:], msg)
-		return m, nil
-	case spinner.TickMsg:
-		var cmd tea.Cmd
-		m.spinner, cmd = m.spinner.Update(msg)
-		return m, cmd
-	default:
-		return m, nil
-	}
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) View() tea.View {
-	var b strings.Builder
-
-	if m.quitting {
-		b.WriteString("That's all for today!")
-	} else {
-		b.WriteString(m.spinner.View())
-		b.WriteString(" Eating food...")
-	}
-
-	b.WriteString("\n\n")
-
-	for _, res := range m.results {
-		b.WriteString(res.String())
-		b.WriteString("\n")
-	}
-
-	if !m.quitting {
-		b.WriteString(helpStyle.Render("Press any key to exit"))
-	}
-
-	if m.quitting {
-		b.WriteString("\n")
-	}
-
-	return tea.NewView(appStyle.Render(b.String()))
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
 func main() {
 	p := tea.NewProgram(newModel())
 
-	// Simulate activity
 	go func() {
 		for {
-			pause := time.Duration(rand.Int63n(899)+100) * time.Millisecond // nolint:gosec
+			pause := time.Duration(rand.Int63n(899)+100) * time.Millisecond
 			time.Sleep(pause)
 
-			// Send the Bubble Tea program a message from outside the
-			// tea.Program. This will block until it is ready to receive
-			// messages.
 			p.Send(resultMsg{food: randomFood(), duration: pause})
 		}
 	}()
@@ -123,11 +61,4 @@ func main() {
 	}
 }
 
-func randomFood() string {
-	food := []string{
-		"an apple", "a pear", "a gherkin", "a party gherkin",
-		"a kohlrabi", "some spaghetti", "tacos", "a currywurst", "some curry",
-		"a sandwich", "some peanut butter", "some cashews", "some ramen",
-	}
-	return food[rand.Intn(len(food))] // nolint:gosec
-}
+func randomFood() string { _ = "STUB: not implemented"; return "" }

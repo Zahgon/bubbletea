@@ -1,14 +1,10 @@
 package main
 
-// A simple program demonstrating the text input component from the Bubbles
-// component library.
-
 import (
 	"log"
 
 	"charm.land/bubbles/v2/textinput"
 	tea "charm.land/bubbletea/v2"
-	"charm.land/lipgloss/v2"
 )
 
 func main() {
@@ -28,53 +24,16 @@ type model struct {
 	quitting  bool
 }
 
-func initialModel() model {
-	ti := textinput.New()
-	ti.Placeholder = "Pikachu"
-	ti.SetVirtualCursor(false)
-	ti.Focus()
-	ti.CharLimit = 156
-	ti.SetWidth(20)
+func initialModel() model { _ = "STUB: not implemented"; return *new(model) }
 
-	return model{textInput: ti}
-}
-
-func (m model) Init() tea.Cmd {
-	return textinput.Blink
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	var cmd tea.Cmd
-
-	switch msg := msg.(type) {
-	case tea.KeyPressMsg:
-		switch msg.String() {
-		case "enter", "ctrl+c", "esc":
-			m.quitting = true
-			return m, tea.Quit
-		}
-	}
-
-	m.textInput, cmd = m.textInput.Update(msg)
-	return m, cmd
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) View() tea.View {
-	var c *tea.Cursor
-	if !m.textInput.VirtualCursor() {
-		c = m.textInput.Cursor()
-		c.Y += lipgloss.Height(m.headerView())
-	}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
-	str := lipgloss.JoinVertical(lipgloss.Top, m.headerView(), m.textInput.View(), m.footerView())
-	if m.quitting {
-		str += "\n"
-	}
-
-	v := tea.NewView(str)
-	v.Cursor = c
-	return v
-}
-
-func (m model) headerView() string { return "What’s your favorite Pokémon?\n" }
-func (m model) footerView() string { return "\n(esc to quit)" }
+func (m model) headerView() string { _ = "STUB: not implemented"; return "" }
+func (m model) footerView() string { _ = "STUB: not implemented"; return "" }

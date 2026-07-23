@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -23,32 +22,11 @@ type progressWriter struct {
 	onProgress func(float64)
 }
 
-func (pw *progressWriter) Start() {
-	// TeeReader calls pw.Write() each time a new response is received
-	_, err := io.Copy(pw.file, io.TeeReader(pw.reader, pw))
-	if err != nil {
-		p.Send(progressErrMsg{err})
-	}
-}
+func (pw *progressWriter) Start() { _ = "STUB: not implemented"; return }
 
-func (pw *progressWriter) Write(p []byte) (int, error) {
-	pw.downloaded += len(p)
-	if pw.total > 0 && pw.onProgress != nil {
-		pw.onProgress(float64(pw.downloaded) / float64(pw.total))
-	}
-	return len(p), nil
-}
+func (pw *progressWriter) Write(p []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
-func getResponse(url string) (*http.Response, error) {
-	resp, err := http.Get(url) // nolint:gosec
-	if err != nil {
-		log.Fatal(err)
-	}
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("receiving status of %d for url: %s", resp.StatusCode, url)
-	}
-	return resp, nil
-}
+func getResponse(url string) (*http.Response, error) { _ = "STUB: not implemented"; return nil, nil }
 
 func main() {
 	url := flag.String("url", "", "url for the file to download")
@@ -64,10 +42,8 @@ func main() {
 		fmt.Println("could not get response", err)
 		os.Exit(1)
 	}
-	defer resp.Body.Close() // nolint:errcheck
+	defer resp.Body.Close()
 
-	// Don't add TUI if the header doesn't include content size
-	// it's impossible see progress without total
 	if resp.ContentLength <= 0 {
 		fmt.Println("can't parse content length, aborting download")
 		os.Exit(1)
@@ -79,7 +55,7 @@ func main() {
 		fmt.Println("could not create file:", err)
 		os.Exit(1)
 	}
-	defer file.Close() // nolint:errcheck
+	defer file.Close()
 
 	pw := &progressWriter{
 		total:  int(resp.ContentLength),
@@ -94,10 +70,9 @@ func main() {
 		pw:       pw,
 		progress: progress.New(progress.WithDefaultBlend()),
 	}
-	// Start Bubble Tea
+
 	p = tea.NewProgram(m)
 
-	// Start the download
 	go pw.Start()
 
 	if _, err := p.Run(); err != nil {

@@ -5,7 +5,4 @@ package tea
 
 import "github.com/charmbracelet/x/term"
 
-func (p *Program) checkOptimizedMovements(*term.State) {
-	p.useHardTabs = true
-	p.useBackspace = true
-}
+func (p *Program) checkOptimizedMovements(*term.State) { _ = "STUB: not implemented"; return }

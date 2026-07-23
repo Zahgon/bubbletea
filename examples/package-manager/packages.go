@@ -1,10 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"math/rand"
-)
-
 var packages = []string{
 	"vegeutils",
 	"libgardening",
@@ -37,16 +32,6 @@ var packages = []string{
 	"libyuzu",
 }
 
-func getPackages() []string {
-	pkgs := packages
-	copy(pkgs, packages)
+func getPackages() []string { _ = "STUB: not implemented"; return nil }
 
-	rand.Shuffle(len(pkgs), func(i, j int) {
-		pkgs[i], pkgs[j] = pkgs[j], pkgs[i]
-	})
-
-	for k := range pkgs {
-		pkgs[k] += fmt.Sprintf("-%d.%d.%d", rand.Intn(10), rand.Intn(10), rand.Intn(10)) //nolint:gosec
-	}
-	return pkgs
-}
+//nolint:gosec

@@ -5,49 +5,32 @@ import (
 	"github.com/charmbracelet/x/ansi"
 )
 
-// nilRenderer is a no-op renderer. It implements the Renderer interface but
-// doesn't render anything to the terminal.
 type nilRenderer struct{}
 
 var _ renderer = nilRenderer{}
 
-// start implements renderer.
-func (n nilRenderer) start() {}
+func (n nilRenderer) start() { _ = "STUB: not implemented"; return }
 
-// clearScreen implements renderer.
-func (n nilRenderer) clearScreen() {}
+func (n nilRenderer) clearScreen() { _ = "STUB: not implemented"; return }
 
-// insertAbove implements renderer.
-func (n nilRenderer) insertAbove(string) error { return nil }
+func (n nilRenderer) insertAbove(string) error { _ = "STUB: not implemented"; return nil }
 
-// resize implements renderer.
-func (n nilRenderer) resize(int, int) {}
+func (n nilRenderer) resize(int, int) { _ = "STUB: not implemented"; return }
 
-// setColorProfile implements renderer.
-func (n nilRenderer) setColorProfile(colorprofile.Profile) {}
+func (n nilRenderer) setColorProfile(colorprofile.Profile) { _ = "STUB: not implemented"; return }
 
-// flush implements the Renderer interface.
-func (nilRenderer) flush(bool) error { return nil }
+func (nilRenderer) flush(bool) error { _ = "STUB: not implemented"; return nil }
 
-// close implements the Renderer interface.
-func (nilRenderer) close() error { return nil }
+func (nilRenderer) close() error { _ = "STUB: not implemented"; return nil }
 
-// render implements the Renderer interface.
-func (nilRenderer) render(View) {}
+func (nilRenderer) render(View) { _ = "STUB: not implemented"; return }
 
-// reset implements the Renderer interface.
-func (nilRenderer) reset() {}
+func (nilRenderer) reset() { _ = "STUB: not implemented"; return }
 
-// writeString implements the Renderer interface.
-func (nilRenderer) writeString(string) (int, error) { return 0, nil }
+func (nilRenderer) writeString(string) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
-// setSyncdUpdates implements the Renderer interface.
-func (n nilRenderer) setSyncdUpdates(bool) {}
+func (n nilRenderer) setSyncdUpdates(bool) { _ = "STUB: not implemented"; return }
 
-// setWidthMethod implements the Renderer interface.
-func (n nilRenderer) setWidthMethod(ansi.Method) {}
+func (n nilRenderer) setWidthMethod(ansi.Method) { _ = "STUB: not implemented"; return }
 
-// onMouse implements the Renderer interface.
-func (n nilRenderer) onMouse(MouseMsg) Cmd {
-	return nil
-}
+func (n nilRenderer) onMouse(MouseMsg) Cmd { _ = "STUB: not implemented"; return *new(Cmd) }

@@ -27,68 +27,16 @@ type keymap struct {
 	quit  key.Binding
 }
 
-func (m model) Init() tea.Cmd {
-	return m.timer.Init()
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case timer.TickMsg:
-		var cmd tea.Cmd
-		m.timer, cmd = m.timer.Update(msg)
-		return m, cmd
-
-	case timer.StartStopMsg:
-		var cmd tea.Cmd
-		m.timer, cmd = m.timer.Update(msg)
-		m.keymap.stop.SetEnabled(m.timer.Running())
-		m.keymap.start.SetEnabled(!m.timer.Running())
-		return m, cmd
-
-	case timer.TimeoutMsg:
-		m.quitting = true
-		return m, tea.Quit
-
-	case tea.KeyPressMsg:
-		switch {
-		case key.Matches(msg, m.keymap.quit):
-			m.quitting = true
-			return m, tea.Quit
-		case key.Matches(msg, m.keymap.reset):
-			m.timer.Timeout = timeout
-		case key.Matches(msg, m.keymap.start, m.keymap.stop):
-			return m, m.timer.Toggle()
-		}
-	}
-
-	return m, nil
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) helpView() string {
-	return "\n" + m.help.ShortHelpView([]key.Binding{
-		m.keymap.start,
-		m.keymap.stop,
-		m.keymap.reset,
-		m.keymap.quit,
-	})
-}
+func (m model) helpView() string { _ = "STUB: not implemented"; return "" }
 
-func (m model) View() tea.View {
-	// For a more detailed timer view you could read m.timer.Timeout to get
-	// the remaining time as a time.Duration and skip calling m.timer.View()
-	// entirely.
-	s := m.timer.View()
-
-	if m.timer.Timedout() {
-		s = "All done!"
-	}
-	s += "\n"
-	if !m.quitting {
-		s = "Exiting in " + s
-		s += m.helpView()
-	}
-	return tea.NewView(s)
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
 func main() {
 	m := model{

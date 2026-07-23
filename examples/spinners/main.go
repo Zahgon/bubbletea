@@ -10,7 +10,6 @@ import (
 )
 
 var (
-	// Available spinners
 	spinners = []spinner.Spinner{
 		spinner.Line,
 		spinner.Dot,
@@ -43,59 +42,13 @@ type model struct {
 	spinner spinner.Model
 }
 
-func (m model) Init() tea.Cmd {
-	return m.spinner.Tick
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyPressMsg:
-		switch msg.String() {
-		case "ctrl+c", "q", "esc":
-			return m, tea.Quit
-		case "h", "left":
-			m.index--
-			if m.index < 0 {
-				m.index = len(spinners) - 1
-			}
-			m.resetSpinner()
-			return m, m.spinner.Tick
-		case "l", "right":
-			m.index++
-			if m.index >= len(spinners) {
-				m.index = 0
-			}
-			m.resetSpinner()
-			return m, m.spinner.Tick
-		default:
-			return m, nil
-		}
-	case spinner.TickMsg:
-		var cmd tea.Cmd
-		m.spinner, cmd = m.spinner.Update(msg)
-		return m, cmd
-	default:
-		return m, nil
-	}
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m *model) resetSpinner() {
-	m.spinner = spinner.New()
-	m.spinner.Style = spinnerStyle
-	m.spinner.Spinner = spinners[m.index]
-}
+func (m *model) resetSpinner() { _ = "STUB: not implemented"; return }
 
-func (m model) View() tea.View {
-	var gap string
-	switch m.index {
-	case 1:
-		gap = ""
-	default:
-		gap = " "
-	}
-
-	var s string
-	s += fmt.Sprintf("\n %s%s%s\n\n", m.spinner.View(), gap, textStyle("Spinning..."))
-	s += helpStyle("h/l, ←/→: change spinner • q: exit\n")
-	return tea.NewView(s)
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }

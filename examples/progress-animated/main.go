@@ -1,16 +1,8 @@
 package main
 
-// A simple example that shows how to render an animated progress bar. In this
-// example we bump the progress by 25% every two seconds, animating our
-// progress bar to its new target state.
-//
-// It's also possible to render a progress bar in a more static fashion without
-// transitions. For details on that approach see the progress-static example.
-
 import (
 	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"charm.land/bubbles/v2/progress"
@@ -42,52 +34,13 @@ type model struct {
 	progress progress.Model
 }
 
-func (m model) Init() tea.Cmd {
-	return tickCmd()
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyPressMsg:
-		return m, tea.Quit
-
-	case tea.WindowSizeMsg:
-		m.progress.SetWidth(msg.Width - padding*2 - 4)
-		if m.progress.Width() > maxWidth {
-			m.progress.SetWidth(maxWidth)
-		}
-		return m, nil
-
-	case tickMsg:
-		if m.progress.Percent() == 1.0 {
-			return m, tea.Quit
-		}
-
-		// Note that you can also use progress.Model.SetPercent to set the
-		// percentage value explicitly, too.
-		cmd := m.progress.IncrPercent(0.25)
-		return m, tea.Batch(tickCmd(), cmd)
-
-	// FrameMsg is sent when the progress bar wants to animate itself
-	case progress.FrameMsg:
-		var cmd tea.Cmd
-		m.progress, cmd = m.progress.Update(msg)
-		return m, cmd
-
-	default:
-		return m, nil
-	}
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) View() tea.View {
-	pad := strings.Repeat(" ", padding)
-	return tea.NewView("\n" +
-		pad + m.progress.View() + "\n\n" +
-		pad + helpStyle("Press any key to quit"))
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
-func tickCmd() tea.Cmd {
-	return tea.Tick(time.Second*1, func(t time.Time) tea.Msg {
-		return tickMsg(t)
-	})
-}
+func tickCmd() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }

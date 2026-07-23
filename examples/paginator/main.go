@@ -1,12 +1,7 @@
 package main
 
-// A simple program demonstrating the paginator component from the Bubbles
-// component library.
-
 import (
-	"fmt"
 	"log"
-	"strings"
 
 	"charm.land/bubbles/v2/paginator"
 	"charm.land/lipgloss/v2"
@@ -19,77 +14,25 @@ type styles struct {
 	inactiveDot lipgloss.Style
 }
 
-func newStyles(bgIsDark bool) (s styles) {
-	lightDark := lipgloss.LightDark(bgIsDark)
-
-	s.activeDot = lipgloss.NewStyle().Foreground(lightDark(lipgloss.Color("235"), lipgloss.Color("252"))).SetString("•")
-	s.inactiveDot = s.activeDot.Foreground(lightDark(lipgloss.Color("250"), lipgloss.Color("238"))).SetString("•")
-	return s
-}
+func newStyles(bgIsDark bool) (s styles) { _ = "STUB: not implemented"; return *new(styles) }
 
 type model struct {
 	items     []string
 	paginator paginator.Model
 }
 
-func newModel() model {
-	var items []string
-	for i := 1; i < 101; i++ {
-		text := fmt.Sprintf("Item %d", i)
-		items = append(items, text)
-	}
+func newModel() model { _ = "STUB: not implemented"; return *new(model) }
 
-	p := paginator.New()
-	p.Type = paginator.Dots
-	p.PerPage = 10
-	p.SetTotalPages(len(items))
+func (m *model) updateStyles(isDark bool) { _ = "STUB: not implemented"; return }
 
-	m := model{
-		paginator: p,
-		items:     items,
-	}
-
-	m.updateStyles(true) // default to dark styles
-	return m
-}
-
-func (m *model) updateStyles(isDark bool) {
-	styles := newStyles(isDark)
-	m.paginator.ActiveDot = styles.activeDot.String()
-	m.paginator.InactiveDot = styles.inactiveDot.String()
-}
-
-func (m model) Init() tea.Cmd {
-	return tea.RequestBackgroundColor
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	var cmd tea.Cmd
-	switch msg := msg.(type) {
-	case tea.BackgroundColorMsg:
-		m.updateStyles(msg.IsDark())
-		return m, nil
-	case tea.KeyPressMsg:
-		switch msg.String() {
-		case "q", "esc", "ctrl+c":
-			return m, tea.Quit
-		}
-	}
-	m.paginator, cmd = m.paginator.Update(msg)
-	return m, cmd
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) View() tea.View {
-	var b strings.Builder
-	b.WriteString("\n  Paginator Example\n\n")
-	start, end := m.paginator.GetSliceBounds(len(m.items))
-	for _, item := range m.items[start:end] {
-		b.WriteString("  • " + item + "\n\n")
-	}
-	b.WriteString("  " + m.paginator.View())
-	b.WriteString("\n\n  h/l ←/→ page • q: quit\n")
-	return tea.NewView(b.String())
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
 func main() {
 	p := tea.NewProgram(newModel())
