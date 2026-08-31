@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 
 	"charm.land/bubbles/v2/help"
 	"charm.land/bubbles/v2/key"
@@ -11,8 +10,6 @@ import (
 	"charm.land/lipgloss/v2"
 )
 
-// keyMap defines a set of keybindings. To work for help it must satisfy
-// key.Map. It could also very easily be a map[string]key.Binding.
 type keyMap struct {
 	Up    key.Binding
 	Down  key.Binding
@@ -22,20 +19,9 @@ type keyMap struct {
 	Quit  key.Binding
 }
 
-// ShortHelp returns keybindings to be shown in the mini help view. It's part
-// of the key.Map interface.
-func (k keyMap) ShortHelp() []key.Binding {
-	return []key.Binding{k.Help, k.Quit}
-}
+func (k keyMap) ShortHelp() []key.Binding { _ = "STUB: not implemented"; return nil }
 
-// FullHelp returns keybindings for the expanded help view. It's part of the
-// key.Map interface.
-func (k keyMap) FullHelp() [][]key.Binding {
-	return [][]key.Binding{
-		{k.Up, k.Down, k.Left, k.Right}, // first column
-		{k.Help, k.Quit},                // second column
-	}
-}
+func (k keyMap) FullHelp() [][]key.Binding { _ = "STUB: not implemented"; return nil }
 
 var keys = keyMap{
 	Up: key.NewBinding(
@@ -72,63 +58,16 @@ type model struct {
 	quitting   bool
 }
 
-func newModel() model {
-	return model{
-		keys:       keys,
-		help:       help.New(),
-		inputStyle: lipgloss.NewStyle().Foreground(lipgloss.Color("#FF75B7")),
-	}
-}
+func newModel() model { _ = "STUB: not implemented"; return *new(model) }
 
-func (m model) Init() tea.Cmd {
-	return nil
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.WindowSizeMsg:
-		// If we set a width on the help menu it can gracefully truncate
-		// its view as needed.
-		m.help.SetWidth(msg.Width)
-
-	case tea.KeyPressMsg:
-		switch {
-		case key.Matches(msg, m.keys.Up):
-			m.lastKey = "↑"
-		case key.Matches(msg, m.keys.Down):
-			m.lastKey = "↓"
-		case key.Matches(msg, m.keys.Left):
-			m.lastKey = "←"
-		case key.Matches(msg, m.keys.Right):
-			m.lastKey = "→"
-		case key.Matches(msg, m.keys.Help):
-			m.help.ShowAll = !m.help.ShowAll
-		case key.Matches(msg, m.keys.Quit):
-			m.quitting = true
-			return m, tea.Quit
-		}
-	}
-
-	return m, nil
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) View() tea.View {
-	if m.quitting {
-		return tea.NewView("Bye!\n")
-	}
-
-	var status string
-	if m.lastKey == "" {
-		status = "Waiting for input..."
-	} else {
-		status = "You chose: " + m.inputStyle.Render(m.lastKey)
-	}
-
-	helpView := m.help.View(m.keys)
-	height := 8 - strings.Count(status, "\n") - strings.Count(helpView, "\n")
-
-	return tea.NewView(status + strings.Repeat("\n", height) + helpView)
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
 func main() {
 	if os.Getenv("HELP_DEBUG") != "" {
@@ -137,7 +76,7 @@ func main() {
 			fmt.Println("Couldn't open a file for logging:", err)
 			os.Exit(1)
 		}
-		defer f.Close() // nolint:errcheck
+		defer f.Close()
 	}
 
 	if _, err := tea.NewProgram(newModel()).Run(); err != nil {

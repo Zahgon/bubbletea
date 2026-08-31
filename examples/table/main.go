@@ -17,34 +17,14 @@ type model struct {
 	table table.Model
 }
 
-func (m model) Init() tea.Cmd { return nil }
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	var cmd tea.Cmd
-	switch msg := msg.(type) {
-	case tea.KeyPressMsg:
-		switch msg.String() {
-		case "esc":
-			if m.table.Focused() {
-				m.table.Blur()
-			} else {
-				m.table.Focus()
-			}
-		case "q", "ctrl+c":
-			return m, tea.Quit
-		case "enter":
-			return m, tea.Batch(
-				tea.Printf("Let's go to %s!", m.table.SelectedRow()[1]),
-			)
-		}
-	}
-	m.table, cmd = m.table.Update(msg)
-	return m, cmd
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) View() tea.View {
-	return tea.NewView(baseStyle.Render(m.table.View()) + "\n  " + m.table.HelpView() + "\n")
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
 func main() {
 	columns := []table.Column{

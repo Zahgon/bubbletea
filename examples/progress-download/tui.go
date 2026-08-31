@@ -1,9 +1,6 @@
 package main
 
 import (
-	"strings"
-	"time"
-
 	"charm.land/bubbles/v2/progress"
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
@@ -20,11 +17,7 @@ type progressMsg float64
 
 type progressErrMsg struct{ err error }
 
-func finalPause() tea.Cmd {
-	return tea.Tick(time.Millisecond*750, func(_ time.Time) tea.Msg {
-		return nil
-	})
-}
+func finalPause() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 type model struct {
 	pw       *progressWriter
@@ -32,54 +25,11 @@ type model struct {
 	err      error
 }
 
-func (m model) Init() tea.Cmd {
-	return nil
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyPressMsg:
-		return m, tea.Quit
-
-	case tea.WindowSizeMsg:
-		m.progress.SetWidth(msg.Width - padding*2 - 4)
-		if m.progress.Width() > maxWidth {
-			m.progress.SetWidth(maxWidth)
-		}
-		return m, nil
-
-	case progressErrMsg:
-		m.err = msg.err
-		return m, tea.Quit
-
-	case progressMsg:
-		var cmds []tea.Cmd
-
-		if msg >= 1.0 {
-			cmds = append(cmds, tea.Sequence(finalPause(), tea.Quit))
-		}
-
-		cmds = append(cmds, m.progress.SetPercent(float64(msg)))
-		return m, tea.Batch(cmds...)
-
-	// FrameMsg is sent when the progress bar wants to animate itself
-	case progress.FrameMsg:
-		var cmd tea.Cmd
-		m.progress, cmd = m.progress.Update(msg)
-		return m, cmd
-
-	default:
-		return m, nil
-	}
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) View() tea.View {
-	if m.err != nil {
-		return tea.NewView("Error downloading: " + m.err.Error() + "\n")
-	}
-
-	pad := strings.Repeat(" ", padding)
-	return tea.NewView("\n" +
-		pad + m.progress.View() + "\n\n" +
-		pad + helpStyle("Press any key to quit"))
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }

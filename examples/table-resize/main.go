@@ -10,7 +10,6 @@ import (
 	"charm.land/lipgloss/v2/table"
 )
 
-// Pokemon types.
 const (
 	None     = ""
 	Bug      = "Bug"
@@ -28,29 +27,14 @@ type model struct {
 	table *table.Table
 }
 
-func (m model) Init() tea.Cmd { return nil }
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	var cmd tea.Cmd
-	switch msg := msg.(type) {
-	case tea.WindowSizeMsg:
-		m.table = m.table.Width(msg.Width)
-		m.table = m.table.Height(msg.Height)
-	case tea.KeyPressMsg:
-		switch msg.String() {
-		case "q", "ctrl+c":
-			return m, tea.Quit
-		case "enter":
-		}
-	}
-	return m, cmd
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) View() tea.View {
-	v := tea.NewView("\n" + m.table.String() + "\n")
-	v.AltScreen = true
-	return v
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
 func main() {
 	baseStyle := lipgloss.NewStyle().Padding(0, 1)
@@ -132,7 +116,7 @@ func main() {
 			even := row%2 == 0
 
 			switch col {
-			case 2, 3: // Type 1 + 2
+			case 2, 3:
 				c := typeColors
 				if even {
 					c = dimTypeColors

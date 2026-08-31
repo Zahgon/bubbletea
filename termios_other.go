@@ -5,4 +5,4 @@ package tea
 
 import "github.com/charmbracelet/x/term"
 
-func (*Program) checkOptimizedMovements(*term.State) {}
+func (*Program) checkOptimizedMovements(*term.State) { _ = "STUB: not implemented"; return }

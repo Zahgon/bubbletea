@@ -25,49 +25,15 @@ type keymap struct {
 	quit  key.Binding
 }
 
-func (m model) Init() tea.Cmd {
-	return m.stopwatch.Init()
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
-func (m model) View() tea.View {
-	// Note: you could further customize the time output by getting the
-	// duration from m.stopwatch.Elapsed(), which returns a time.Duration, and
-	// skip m.stopwatch.View() altogether.
-	s := m.stopwatch.View() + "\n"
-	if !m.quitting {
-		s = "Elapsed: " + s
-		s += m.helpView()
-	}
-	return tea.NewView(s)
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
-func (m model) helpView() string {
-	return "\n" + m.help.ShortHelpView([]key.Binding{
-		m.keymap.start,
-		m.keymap.stop,
-		m.keymap.reset,
-		m.keymap.quit,
-	})
-}
+func (m model) helpView() string { _ = "STUB: not implemented"; return "" }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyPressMsg:
-		switch {
-		case key.Matches(msg, m.keymap.quit):
-			m.quitting = true
-			return m, tea.Quit
-		case key.Matches(msg, m.keymap.reset):
-			return m, m.stopwatch.Reset()
-		case key.Matches(msg, m.keymap.start, m.keymap.stop):
-			m.keymap.stop.SetEnabled(!m.stopwatch.Running())
-			m.keymap.start.SetEnabled(m.stopwatch.Running())
-			return m, m.stopwatch.Toggle()
-		}
-	}
-	var cmd tea.Cmd
-	m.stopwatch, cmd = m.stopwatch.Update(msg)
-	return m, cmd
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
 func main() {

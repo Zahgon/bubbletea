@@ -6,7 +6,6 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 	"github.com/charmbracelet/colorprofile"
-	"github.com/charmbracelet/x/ansi"
 	"github.com/lucasb-eyer/go-colorful"
 )
 
@@ -16,32 +15,14 @@ type model struct{}
 
 var _ tea.Model = model{}
 
-// Init implements tea.Model.
-func (m model) Init() tea.Cmd {
-	return tea.Batch(
-		tea.RequestCapability("RGB"),
-		tea.RequestCapability("Tc"),
-	)
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
-// Update implements tea.Model.
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyMsg:
-		return m, tea.Quit
-	case tea.ColorProfileMsg:
-		return m, tea.Println("Color profile manually set to ", msg)
-	}
-	return m, nil
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-// View implements tea.Model.
-func (m model) View() tea.View {
-	return tea.NewView("This will produce the wrong colors on Apple Terminal :)\n\n" +
-		ansi.Style{}.ForegroundColor(myFancyColor).Styled("Howdy!") +
-		"\n\n" +
-		"Press any key to exit.")
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
 func main() {
 	myFancyColor, _ = colorful.Hex("#6b50ff")

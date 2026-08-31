@@ -9,24 +9,14 @@ import (
 
 type model bool
 
-func (m model) Init() tea.Cmd {
-	return nil
-}
+func (m model) Init() tea.Cmd { _ = "STUB: not implemented"; return *new(tea.Cmd) }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	if _, ok := msg.(tea.KeyPressMsg); ok {
-		m = true
-		return m, tea.Quit
-	}
-	return m, nil
+	_ = "STUB: not implemented"
+	return *new(tea.Model), *new(tea.Cmd)
 }
 
-func (m model) View() tea.View {
-	if m {
-		return tea.NewView("")
-	}
-	return tea.NewView("Press any key to quit.\n(When this program quits, it will vanish without a trace.)")
-}
+func (m model) View() tea.View { _ = "STUB: not implemented"; return *new(tea.View) }
 
 func main() {
 	p := tea.NewProgram(model(false))
